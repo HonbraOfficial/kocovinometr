@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Kocovinometr</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/material-components-web@6.0.0/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@6.0.0/dist/material-components-web.min.css" />
+
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-database.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">menu</button>
+                <span class="mdc-top-app-bar__title">Kocovinometr</span>
+            </section>
+            <!--             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite">favorite</button>
+                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
+                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button>
+            </section> -->
+        </div>
+    </header>
+
+    <main class="main-content" id="main-content">
+        <div class="mdc-top-app-bar--fixed-adjust">
+            <div class="mdc-card dashboard">
+                <div class="mdc-typography--headline4" id="dl"></div>
+                <div class="mdc-typography--headline5" id="rank"></div>
+            </div>
+            <div class="mdc-card dashboard">
+
+                <button class="mdc-button mdc-button--raised" onclick="pointsAdd = 1;pointsDiag.open()">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__label">Přidat bod</span>
+                </button>
+                <button class="mdc-button" onclick="pointsAdd = -1;pointsDiag.open()">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__label">Odebrat bod</span>
+                </button>
+            </div>
+
+            <div class="mdc-card dashboard">
+                <div class="mdc-typography--headline5" id="name"></div>
+                <button class="mdc-button" onclick="changeName()">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__label">Změnit</span>
+                </button>
+            </div>
+            <div class="mdc-card dashboard">
+                <div class="mdc-typography--headline5" id="name">Seznam lidí</div>
+                <div id="rivals"></div>
+            </div>
+            <div class="mdc-card dashboard">
+                <img id="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://honbraofficial.github.io/kocovinometr">
+            </div>
+        </div>
+    </main>
+
+    <div class="mdc-dialog" id="points-diag">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="points-diag-title" aria-describedby="points-diag-content">
+                <h2 class="mdc-dialog__title" id="points-diag-title">Kolik?</h2>
+                <div class="mdc-dialog__content" id="points-diag-content">
+                    <ul class="mdc-list mdc-list--avatar-list">
+                        <li class="mdc-list-item" tabindex="0" data-mdc-dialog-action="none">
+                            <span class="mdc-list-item__text">Nic</span>
+                        </li>
+                        <li class="mdc-list-item" data-mdc-dialog-action="1" onclick="addPoint(1)">
+                            <span class="mdc-list-item__text">1dl</span>
+                        </li>
+                        <li class="mdc-list-item" data-mdc-dialog-action="2" onclick="addPoint(2)">
+                            <span class="mdc-list-item__text">2dl</span>
+                        </li>
+                        <li class="mdc-list-item" data-mdc-dialog-action="3" onclick="addPoint(3)">
+                            <span class="mdc-list-item__text">3dl</span>
+                        </li>
+                        <li class="mdc-list-item" data-mdc-dialog-action="4" onclick="addPoint(4)">
+                            <span class="mdc-list-item__text">4dl</span>
+                        </li>
+                        <li class="mdc-list-item" data-mdc-dialog-action="5" onclick="addPoint(5)">
+                            <span class="mdc-list-item__text">5dl</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+
+    </div>
+</body>
+
+</html>
